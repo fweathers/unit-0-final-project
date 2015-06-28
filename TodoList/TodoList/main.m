@@ -12,6 +12,9 @@
 
 @property (nonatomic) NSMutableArray *lists;
 
+- (void)addItem;
+- (void)removeItem;
+
 //-(void)arr:(NSMutableArray)
 //-(void)print;
 
@@ -25,7 +28,14 @@
 
 @implementation Manager
 
-
+- (NSMutableArray *)lists {
+    NSLog(@"What would you like to do?");
+    //lists options: new list, add item, remove item, mark item done, mark item done
+    
+    if () {
+        <#statements#>
+    }
+}
 
 - (void)print {
     NSLog(@"\n1)Add item to list\n2)Remove item from list\n3)Create new list");

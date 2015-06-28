@@ -10,32 +10,49 @@
 
 @interface Manager: NSObject
 
-@property (nonatomic) NSMutableArray *lists;
+@property (nonatomic) NSMutableArray *listTopic;
 
-- (void)addItem;
-- (void)removeItem;
+- (void)createListCategory;
+- (void)removeListCategory;
+- (void)editListCategory;
+- (void)listCategoryDone;
+- (void)listCategoryActive;
+- (void)listCategoryPriority;
 
-//-(void)arr:(NSMutableArray)
-//-(void)print;
+
 
 @end
 
-@interface list: NSObject
+@interface TaskList: NSObject
 @end
 
-@interface item: NSObject
+@interface Item: NSObject
 @end
 
 @implementation Manager
 
-- (NSMutableArray *)lists {
+- (NSMutableArray *)listTopic {
     NSLog(@"What would you like to do?");
     //lists options: new list, add item, remove item, mark item done, mark item done
     
-    if () {
-        <#statements#>
+    if (!_listTopic) {
+        _listTopic = [[NSMutableArray alloc]init];
     }
+    return _listTopic; //if the item is not a list topic, then create one
 }
+
+- (void)addItem: (NSString *)chore {
+    NSLog(@"%@", chore);
+}
+
+- (void)removeItem: (NSString *)chore {
+    
+}
+
+
+
+
+
 
 - (void)print {
     NSLog(@"\n1)Add item to list\n2)Remove item from list\n3)Create new list");

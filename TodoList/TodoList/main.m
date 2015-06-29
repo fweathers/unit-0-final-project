@@ -49,9 +49,10 @@
     return newList;
 }
 
+
 -(int)showMenu
 {
-    printf("What would you like to do?\n0. Exit\n1. Create a list\n2. Print lists\n");
+    printf("What would you like to do?\n0. Exit\n1. Create a list\n2. Print lists\n3. Remove content\n");
     
     int input;
     scanf("%d", &input);
@@ -66,6 +67,12 @@
             printf("%s\n", [[NSString stringWithFormat:@"%@", list] cStringUsingEncoding:NSUTF8StringEncoding]);
     }
 }
+
+//-(List *)deleteContent
+//{
+//
+//}
+
 
 -(void)start
 {
@@ -86,6 +93,14 @@
         else if (menuPicked == 2) {
             [self printLists];
         }
+        else if (menuPicked == 3) {
+            printf("What would you like to remove?");
+            
+            
+            int deleteContent;
+            scanf("%d", &deleteContent);
+            
+        }
     }
 }
 
@@ -105,7 +120,7 @@
         self.items = [[NSMutableArray alloc] init];
     }
     
-    printf("What would you list to add to your list?\n");
+    printf("What would you like to add to your list?\n");
     
     char input[1024];
     scanf("%s", input);

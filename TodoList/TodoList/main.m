@@ -10,7 +10,8 @@
 
 @interface Manager: NSObject
 
-@property (nonatomic) NSMutableArray *listTopic;
+//@property (nonatomic) NSMutableArray *listTopic;
+
 
 - (void)createListCategory;
 - (void)removeListCategory;
@@ -18,6 +19,7 @@
 - (void)listCategoryDone;
 - (void)listCategoryActive;
 - (void)listCategoryPriority;
+- (void)showList;
 
 
 
@@ -31,48 +33,54 @@
 
 @implementation Manager
 
-- (NSMutableArray *)listTopic {
-    NSLog(@"What would you like to do?");
+- (void) createListCategory: (NSMutableArray *)firstList {
+    //NSLog(@"What type of list are you making?");
     //lists options: new list, add item, remove item, mark item done, mark item done
+    NSLog(@"\n1)Show List\n2)Create List\n3)Remove list\n4)Edit list\n5)Item Done");
+    int option;
+    scanf("%d", &option);
+    if (option == '1') {
+        [m listTopic];
+    }
+
     
+    
+    char c[256];
+    scanf("%s", c);
+    
+    NSString *s = [NSString stringWithFormat:@"%s", c];
+    NSLog(@"%@", s);
+
     if (!_listTopic) {
         _listTopic = [[NSMutableArray alloc]init];
+        NSLog(@"%@", _listTopic);
     }
-    return _listTopic; //if the item is not a list topic, then create one
+    //if the item is not a list topic, then create one
 }
 
-- (void)addItem: (NSString *)chore {
-    NSLog(@"%@", chore);
-}
+//- (void)addItem: (NSString *)chore {
+//    NSLog(@"%@", chore);
+//}
 
-- (void)removeItem: (NSString *)chore {
-    
-}
-
-
-
-
-
-
-- (void)print {
-    NSLog(@"\n1)Add item to list\n2)Remove item from list\n3)Create new list");
-}
-
+//- (void)removeItem: (NSString *)chore {
+//    
+//}
 @end
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
-        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        //NSMutableArray *arr = [[NSMutableArray alloc] init];
         Manager *m = [[Manager alloc] init];
-        [m print];
-        if (print == buf) {
-            NSLog(@"%s", buf);
-        }
+        [m createListCategory];
+
+//        if () {
+//            NSLog(@"%s", buf);
+//        }
 //        NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:3];
 //        for (int i = 0; i < 3; i++) {
-            char buf[100];
-            scanf("%s", buf);
+//            char buf;
+//            scanf("%s", &buf);
 //            NSString *str = [NSString stringWithCString:buf encoding:NSASCIIStringEncoding];
 //            [arr addObject:str];
 //        }

@@ -8,75 +8,134 @@
 
 #import <Foundation/Foundation.h>
 
+@class Manager;
+@class List;
+@class Item;
+
 @interface Manager: NSObject
 
-@property (nonatomic) NSMutableArray *listTopic;
+@property (nonatomic) NSMutableArray *lists;
 
-- (void)createListCategory;
-- (void)removeListCategory;
-- (void)editListCategory;
-- (void)listCategoryDone;
-- (void)listCategoryActive;
-- (void)listCategoryPriority;
-
-
+- (void)start;
 
 @end
 
-@interface TaskList: NSObject
+@interface List: NSObject
+
+@property (nonatomic) NSMutableArray *items;
+
+// Calls scanf and creates a new Item and adds that item to items array
+-(Item *)scanItem;
+
 @end
 
 @interface Item: NSObject
+
+@property (nonatomic) NSString *content;
+
 @end
+
 
 @implementation Manager
 
-- (NSMutableArray *)listTopic {
-    NSLog(@"What would you like to do?");
-    //lists options: new list, add item, remove item, mark item done, mark item done
-    
-    if (!_listTopic) {
-        _listTopic = [[NSMutableArray alloc]init];
+- (List *)createList
+{
+    if (!self.lists) {
+        self.lists = [[NSMutableArray alloc] init];
     }
-    return _listTopic; //if the item is not a list topic, then create one
-}
-
-- (void)addItem: (NSString *)chore {
-    NSLog(@"%@", chore);
-}
-
-- (void)removeItem: (NSString *)chore {
     
+    List *newList = [[List alloc] init];
+    [self.lists addObject:newList];
+    return newList;
 }
 
+-(int)showMenu
+{
+    printf("What would you like to do?\n0. Exit\n1. Create a list\n2. Print lists\n");
+    
+    int input;
+    scanf("%d", &input);
+    
+    return input;
+}
 
+-(void)printLists
+{
+    // For each list in self.lists
+    for (List *list in self.lists) {
+            printf("%s\n", [[NSString stringWithFormat:@"%@", list] cStringUsingEncoding:NSUTF8StringEncoding]);
+    }
+}
 
+-(void)start
+{
+    
+    while (true) {
+        int menuPicked = [self showMenu];
+        
+        if (menuPicked == 0) {
+            break;
+        }
+        else if (menuPicked == 1){
+            List *list = [self createList];
+            while (true) {
+                Item *newItem = [list scanItem];
+                if (!newItem) break;
+            }
+        }
+        else if (menuPicked == 2) {
+            [self printLists];
+        }
+    }
+}
 
+@end
 
+@implementation List
 
-- (void)print {
-    NSLog(@"\n1)Add item to list\n2)Remove item from list\n3)Create new list");
+-(NSString *)description
+{
+    // What gets printed when the object gets printed
+    return [NSString stringWithFormat:@"%@", self.items];
+}
+
+-(Item *)scanItem
+{
+    if (!self.items) {
+        self.items = [[NSMutableArray alloc] init];
+    }
+    
+    printf("What would you list to add to your list?\n");
+    
+    char input[1024];
+    scanf("%s", input);
+    if (strcmp(input, "0") == 0) {
+        return nil;
+    }
+    
+    Item *item = [[Item alloc] init];
+    item.content = @(input);
+    
+    [self.items addObject:item];
+    
+    return item;
+}
+@end
+
+@implementation Item
+
+-(NSString *)description
+{
+    return self.content;
 }
 
 @end
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        
-        NSMutableArray *arr = [[NSMutableArray alloc] init];
-        Manager *m = [[Manager alloc] init];
-        [m print];
-        if (print == buf) {
-            NSLog(@"%s", buf);
-        }
-//        NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:3];
-//        for (int i = 0; i < 3; i++) {
-            char buf[100];
-            scanf("%s", buf);
-//            NSString *str = [NSString stringWithCString:buf encoding:NSASCIIStringEncoding];
-//            [arr addObject:str];
-//        }
-    
+ 
+        Manager *manager = [[Manager alloc] init];
+        [manager start];
     }
     return 0;
 }

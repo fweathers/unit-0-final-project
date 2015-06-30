@@ -33,6 +33,7 @@
 -(int)showMenu
 {
     printf("What would you like to do?\n0. Exit\n1. Create a list\n2. Print lists\n3. Remove content\n");
+    fpurge(stdin);
     
     int input;
     scanf("%d", &input);
@@ -45,6 +46,7 @@
     // For each list in self.lists
     for (List *list in self.lists) {
         printf("%s\n", [[NSString stringWithFormat:@"%@", list] cStringUsingEncoding:NSUTF8StringEncoding]);
+        fpurge(stdin);
     }
 }
 
@@ -75,19 +77,21 @@
         }
         else if (menuPicked == 3) {
             printf("This list contains");
+            fpurge(stdin);
+
             [self printLists];
             
             printf("What would you like to remove?");
-            
+            fpurge(stdin);
+
             
             int deleteContent;
             scanf("%d", &deleteContent);
             
             if ([[[self.lists firstObject]getItems] count] >= deleteContent) {
-                [[[self.lists firstObject]getItems]removeObjectAtIndex:deleteContent];
+                [[[self.lists firstObject]getItems]removeObjectAtIndex:deleteContent-1];
+                fpurge(stdin);
             }
-            
-            
         }
     }
 }

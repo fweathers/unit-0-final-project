@@ -25,6 +25,7 @@
     }
     
     printf("What would you like to add to your list?\n");
+    fpurge(stdin);
     
     char input[1024];
     scanf("%s", input);

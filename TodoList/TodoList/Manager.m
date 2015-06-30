@@ -32,7 +32,7 @@
 
 -(int)showMenu
 {
-    printf("What would you like to do?\n0. Exit\n1. Create a list\n2. Print lists\n3. Remove content\n");
+    printf("What would you like to do?\n0. Exit\n1. Create a list\n2. Print lists\n3. Remove content\n4. Mark as done\n5. Edit Item\n");
     fpurge(stdin);
     
     int input;
@@ -46,15 +46,8 @@
     // For each list in self.lists
     for (List *list in self.lists) {
         printf("%s\n", [[NSString stringWithFormat:@"%@", list] cStringUsingEncoding:NSUTF8StringEncoding]);
-        fpurge(stdin);
     }
 }
-
-//-(List *)deleteContent
-//{
-//
-//}
-
 
 -(void)start
 {
@@ -81,7 +74,7 @@
 
             [self printLists];
             
-            printf("What would you like to remove?");
+            printf("What would you like to remove?\n");
             fpurge(stdin);
 
             
@@ -91,6 +84,39 @@
             if ([[[self.lists firstObject]getItems] count] >= deleteContent) {
                 [[[self.lists firstObject]getItems]removeObjectAtIndex:deleteContent-1];
                 fpurge(stdin);
+            }
+            else {
+                printf("Sorry that is not a valid option\n");
+                fpurge(stdin);
+            }
+        }
+/*        else if (menuPicked == 4) {
+            printf("Which item would you like to mark as complete?\n");
+            fpurge(stdin);
+            
+            [self printLists];
+            
+            int markDone;
+            scanf("%d", &markDone);
+            
+            if ([[self.lists firstObject]getItems] count] >= markDone) {
+                [[self.lists firstObject]getItems] 
+            }
+ 
+        }*/
+        else if (menuPicked == 5) {
+            printf("Which item would you like to edit");
+            fpurge(stdin);
+            
+            [self printLists];
+            
+            int replaceItem;
+            scanf("%d", &replaceItem);
+            
+            if ([[[self.lists firstObject]getItems] count] >= replaceItem) {
+                Item *newItem = [[self.lists firstObject]scanItem];
+
+                [[[self.lists firstObject]getItems] replaceObjectAtIndex:replaceItem-1 withObject:newItem];
             }
         }
     }

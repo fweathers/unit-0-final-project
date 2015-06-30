@@ -42,6 +42,8 @@
 }
 
 -(NSMutableArray *)getItems
+//@property (nonatomic) addComplete;
+
 {
     return self.items;
 }

@@ -114,9 +114,11 @@
             scanf("%d", &replaceItem);
             
             if ([[[self.lists firstObject]getItems] count] >= replaceItem) {
-                Item *newItem = [[self.lists firstObject]scanItem];
+                Item *newItem = [ [self.lists firstObject]scanItem];
 
                 [[[self.lists firstObject]getItems] replaceObjectAtIndex:replaceItem-1 withObject:newItem];
+                [[[self.lists firstObject]getItems] removeLastObject];
+   
             }
         }
     }

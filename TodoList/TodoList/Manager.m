@@ -69,7 +69,7 @@
             [self printLists];
         }
         else if (menuPicked == 3) {
-            printf("This list contains");
+            printf("This list contains:\n");
             fpurge(stdin);
 
             [self printLists];
@@ -105,7 +105,7 @@
  
         }*/
         else if (menuPicked == 5) {
-            printf("Which item would you like to edit");
+            printf("Which item would you like to edit?\n");
             fpurge(stdin);
             
             [self printLists];

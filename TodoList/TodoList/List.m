@@ -17,21 +17,22 @@
     // What gets printed when the object gets printed
     return [NSString stringWithFormat:@"%@", self.items];
 }
-
 -(Item *)scanItem
 {
     if (!self.items) {
         self.items = [[NSMutableArray alloc] init];
     }
     
-    printf("What would you like to add to your list?\n");
-    fpurge(stdin);
+    printf("What would you like to add to your list? (Or enter 0 to exit) \n");
     
-    char input[1024];
-    scanf("%s", input);
-    if (strcmp(input, "0") == 0) {
-        return nil;
-    }
+    
+    NSFileHandle *standardInput = [NSFileHandle fileHandleWithStandardInput];
+    NSString *inputLine = [[[NSString alloc] initWithData:standardInput.availableData encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    
+//    if (strcmp(input, "0") == 0) {
+//        return nil;
+//    }
     
     Item *item = [[Item alloc] init];
     item.content = @(input);

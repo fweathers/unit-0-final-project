@@ -87,7 +87,7 @@
             int deleteContent;
             scanf("%d", &deleteContent);
             
-            if ([[[self.lists objectAtIndex:accessArray-1]getItems] count] >= deleteContent) {
+            if ([[[self.lists objectAtIndex:accessArray-1]getItems] count] > deleteContent) {
                 [[[self.lists objectAtIndex:accessArray-1]getItems]removeObjectAtIndex:deleteContent-1];
                 fpurge(stdin);
             }
@@ -111,11 +111,15 @@
  
         }*/
         else if (menuPicked == 4) {
+            NSFileHandle *standardInput = [NSFileHandle fileHandleWithStandardInput];
+            NSString *inputLine = [[[NSString alloc] initWithData:standardInput.availableData encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+            
             printf("Which list would you like to access?\n");
             fpurge(stdin);
             
-            int accessArrayAlso;
-            scanf("%d", &accessArrayAlso);
+            int accessArray;
+            scanf("%d", &accessArray);
             
             printf("Which item would you like to edit?\n");
             fpurge(stdin);
@@ -125,12 +129,17 @@
             int replaceItem;
             scanf("%d", &replaceItem);
             
-            if ([[[self.lists objectAtIndex:accessArrayAlso-1]getItems] count] >= replaceItem) {
-                Item *newItem = [ [self.lists firstObject]scanItem];
+            if ([[[self.lists objectAtIndex:accessArray-1]getItems] count] > replaceItem) {
+                Item *newItem = [ [self.lists objectAtIndex:accessArray-1]scanItem];
 
-                [[[self.lists objectAtIndex:accessArrayAlso-1]getItems] replaceObjectAtIndex:replaceItem-1 withObject:newItem];
-                [[[self.lists objectAtIndex:accessArrayAlso-1]getItems] removeLastObject];
+                [[[self.lists objectAtIndex:accessArray-1]getItems] replaceObjectAtIndex:replaceItem-1 withObject:newItem];
+                [[[self.lists objectAtIndex:accessArray-1]getItems] removeLastObject];
    
+            }
+            else if (command[0] == '0'){
+            
+                    printf("Not a valid option");
+                    fpurge(stdin);
             }
         }
     }

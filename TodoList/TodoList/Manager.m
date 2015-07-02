@@ -77,12 +77,12 @@
             
             printf("This list contains:\n");
             fpurge(stdin);
-
+            
             [self printLists];
             
             printf("What would you like to remove?\n");
             fpurge(stdin);
-
+            
             
             int deleteContent;
             scanf("%d", &deleteContent);
@@ -96,25 +96,21 @@
                 fpurge(stdin);
             }
         }
-/*        else if (menuPicked == 4) {
-            printf("Which item would you like to mark as complete?\n");
-            fpurge(stdin);
-            
-            [self printLists];
-            
-            int markDone;
-            scanf("%d", &markDone);
-            
-            if ([[self.lists firstObject]getItems] count] >= markDone) {
-                [[self.lists firstObject]getItems] 
-            }
- 
-        }*/
+        /*        else if (menuPicked == 4) {
+         printf("Which item would you like to mark as complete?\n");
+         fpurge(stdin);
+         
+         [self printLists];
+         
+         int markDone;
+         scanf("%d", &markDone);
+         
+         if ([[self.lists firstObject]getItems] count] >= markDone) {
+         [[self.lists firstObject]getItems]
+         }
+         
+         }*/
         else if (menuPicked == 4) {
-            NSFileHandle *standardInput = [NSFileHandle fileHandleWithStandardInput];
-            NSString *inputLine = [[[NSString alloc] initWithData:standardInput.availableData encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-            
             printf("Which list would you like to access?\n");
             fpurge(stdin);
             
@@ -130,19 +126,17 @@
             scanf("%d", &replaceItem);
             
             if ([[[self.lists objectAtIndex:accessArray-1]getItems] count] > replaceItem) {
+                
                 Item *newItem = [ [self.lists objectAtIndex:accessArray-1]scanItem];
-
-                [[[self.lists objectAtIndex:accessArray-1]getItems] replaceObjectAtIndex:replaceItem-1 withObject:newItem];
-                [[[self.lists objectAtIndex:accessArray-1]getItems] removeLastObject];
-   
-            }
-            else if (command[0] == '0'){
-            
-                    printf("Not a valid option");
-                    fpurge(stdin);
+                
+                if (newItem != nil) {
+                    
+                    [[[self.lists objectAtIndex:accessArray-1]getItems] replaceObjectAtIndex:replaceItem-1 withObject:newItem];
+                    
+                    [[[self.lists objectAtIndex:accessArray-1]getItems] removeLastObject];
+                }
             }
         }
     }
 }
-
 @end

@@ -87,7 +87,7 @@
             int deleteContent;
             scanf("%d", &deleteContent);
             
-            if ([[[self.lists objectAtIndex:accessArray-1]getItems] count] > deleteContent) {
+            if ([[[self.lists objectAtIndex:accessArray-1]getItems] count] >= deleteContent) {
                 [[[self.lists objectAtIndex:accessArray-1]getItems]removeObjectAtIndex:deleteContent-1];
                 fpurge(stdin);
             }
@@ -125,7 +125,7 @@
             int replaceItem;
             scanf("%d", &replaceItem);
             
-            if ([[[self.lists objectAtIndex:accessArray-1]getItems] count] > replaceItem) {
+            if ([[[self.lists objectAtIndex:accessArray-1]getItems] count] >= replaceItem) {
                 
                 Item *newItem = [ [self.lists objectAtIndex:accessArray-1]scanItem];
                 

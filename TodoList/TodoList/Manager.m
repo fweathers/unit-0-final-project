@@ -32,7 +32,7 @@
 
 -(int)showMenu
 {
-    printf("What would you like to do?\n0. Exit\n1. Create a list\n2. Print lists\n3. Remove content\n4. Mark as done\n5. Edit Item\n");
+    printf("What would you like to do?\n0. Exit\n1. Create a list\n2. Print lists\n3. Remove content\n4. Edit Item\n");
     fpurge(stdin);
     
     int input;
@@ -69,6 +69,12 @@
             [self printLists];
         }
         else if (menuPicked == 3) {
+            printf("Which list would you like to access?\n");
+            fpurge(stdin);
+            
+            int accessArray;
+            scanf("%d", &accessArray);
+            
             printf("This list contains:\n");
             fpurge(stdin);
 
@@ -81,8 +87,8 @@
             int deleteContent;
             scanf("%d", &deleteContent);
             
-            if ([[[self.lists firstObject]getItems] count] >= deleteContent) {
-                [[[self.lists firstObject]getItems]removeObjectAtIndex:deleteContent-1];
+            if ([[[self.lists objectAtIndex:accessArray-1]getItems] count] >= deleteContent) {
+                [[[self.lists objectAtIndex:accessArray-1]getItems]removeObjectAtIndex:deleteContent-1];
                 fpurge(stdin);
             }
             else {
@@ -104,7 +110,13 @@
             }
  
         }*/
-        else if (menuPicked == 5) {
+        else if (menuPicked == 4) {
+            printf("Which list would you like to access?\n");
+            fpurge(stdin);
+            
+            int accessArrayAlso;
+            scanf("%d", &accessArrayAlso);
+            
             printf("Which item would you like to edit?\n");
             fpurge(stdin);
             
@@ -113,11 +125,11 @@
             int replaceItem;
             scanf("%d", &replaceItem);
             
-            if ([[[self.lists firstObject]getItems] count] >= replaceItem) {
+            if ([[[self.lists objectAtIndex:accessArrayAlso-1]getItems] count] >= replaceItem) {
                 Item *newItem = [ [self.lists firstObject]scanItem];
 
-                [[[self.lists firstObject]getItems] replaceObjectAtIndex:replaceItem-1 withObject:newItem];
-                [[[self.lists firstObject]getItems] removeLastObject];
+                [[[self.lists objectAtIndex:accessArrayAlso-1]getItems] replaceObjectAtIndex:replaceItem-1 withObject:newItem];
+                [[[self.lists objectAtIndex:accessArrayAlso-1]getItems] removeLastObject];
    
             }
         }

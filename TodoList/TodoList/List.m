@@ -29,13 +29,15 @@
     NSFileHandle *standardInput = [NSFileHandle fileHandleWithStandardInput];
     NSString *inputLine = [[[NSString alloc] initWithData:standardInput.availableData encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
+    const char *command = [inputLine UTF8String];
     
-//    if (strcmp(input, "0") == 0) {
-//        return nil;
-//    }
+    if (command[0] == '0') {
+        
+        return nil;
+    }
     
     Item *item = [[Item alloc] init];
-    item.content = @(input);
+    item.content = (inputLine);
     
     [self.items addObject:item];
     
